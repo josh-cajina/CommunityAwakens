@@ -8,10 +8,8 @@ namespace CommunityAwakens.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime AppointmentDate { get; set; }
-        public string Place { get; set; }
-        public int SpaceAvailable { get; set; }
-        public Group Group { get; set; }
+        public DateTime DueDate { get; set; }
+        public string Link { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModificationDate { get; set; }
     }

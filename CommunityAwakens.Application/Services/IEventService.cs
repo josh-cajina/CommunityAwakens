@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CommunityAwakens.Domain.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CommunityAwakens.Domain.Entities;
 
 namespace CommunityAwakens.Application.Services
 {
@@ -8,7 +8,11 @@ namespace CommunityAwakens.Application.Services
     {
         Event GetEventById(int eventId);
         Task<Event> GetEventByIdAsync(int eventId);
-        IEnumerable<Event> GetEventsByGroup(int groupId);
-        Task<IEnumerable<Event>> GetEventsByGroupAsync(int groupId);
+        IEnumerable<Event> GetAllEvents();
+        Task<IEnumerable<Event>> GetAllEventsAsync();
+        int CreateEvent(Event newEvent);
+        Task<int> CreateEventAsync(Event newEvent);
+        void Delete(int eventId);
+        Task DeleteAsync(int eventId);
     }
 }

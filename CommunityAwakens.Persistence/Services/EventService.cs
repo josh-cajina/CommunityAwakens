@@ -1,7 +1,7 @@
-﻿using CommunityAwakens.Application.Context;
+﻿using System.Collections.Generic;
+using CommunityAwakens.Application.Context;
 using CommunityAwakens.Application.Services;
 using CommunityAwakens.Domain.Entities;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunityAwakens.Persistence.Services
@@ -25,14 +25,34 @@ namespace CommunityAwakens.Persistence.Services
             return Task.FromResult(GetEventById(eventId));
         }
 
-        public IEnumerable<Event> GetEventsByGroup(int groupId)
+        public IEnumerable<Event> GetAllEvents()
         {
-            return _dbContext.Database.GetCollection<Event>("Events").Find(evnt => evnt.Group.Id == groupId);
+            return _dbContext.Database.GetCollection<Event>("Events").FindAll();
         }
 
-        public Task<IEnumerable<Event>> GetEventsByGroupAsync(int groupId)
+        public Task<IEnumerable<Event>> GetAllEventsAsync()
         {
-            return Task.FromResult(GetEventsByGroup(groupId));
+            return Task.FromResult(GetAllEvents());
+        }
+
+        public int CreateEvent(Event newEvent)
+        {
+            return _dbContext.Database.GetCollection<Event>("Events").Insert(newEvent);
+        }
+
+        public Task<int> CreateEventAsync(Event newEvent)
+        {
+            return Task.FromResult(CreateEvent(newEvent));
+        }
+
+        public void Delete(int eventId)
+        {
+            _dbContext.Database.GetCollection<Event>("Events").Delete(evnt => evnt.Id == eventId);
+        }
+
+        public Task DeleteAsync(int eventId)
+        {
+            return Task.Run(() => Delete(eventId));
         }
     }
 }
