@@ -11,6 +11,7 @@ namespace CommunityAwakens.Domain.Entities
         public DateTime AppointmentDate { get; set; }
         public string Place { get; set; }
         public int SpaceAvailable { get; set; }
+        public Group Group { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModificationDate { get; set; }
     }
