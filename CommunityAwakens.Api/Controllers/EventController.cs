@@ -1,6 +1,8 @@
-﻿using CommunityAwakens.Application.Services;
+﻿using CommunityAwakens.Api.Responses;
+using CommunityAwakens.Application.Services;
 using CommunityAwakens.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunityAwakens.Api.Controllers
@@ -19,21 +21,21 @@ namespace CommunityAwakens.Api.Controllers
         public async Task<ActionResult<Event>> GetByIdAsync(int id)
         {
             var evnt = await _eventService.GetEventByIdAsync(id);
-            return Ok(evnt);
+            return Ok(new BaseResponse<Event>(evnt));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
             var events = await _eventService.GetAllEventsAsync();
-            return Ok(events);
+            return Ok(new BaseResponse<IEnumerable<Event>>(events));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] Event newEvent)
         {
             var newEventId = await _eventService.CreateEventAsync(newEvent);
-            return Ok(newEventId);
+            return Ok(new BaseResponse<int>(newEventId));
         }
 
         [HttpDelete("{id}")]
